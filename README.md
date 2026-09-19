@@ -1,114 +1,269 @@
-# RamCleaner
+<div align="center">
 
-A lightweight Windows RAM optimization tool that helps free up memory by trimming working sets, purging standby lists, and flushing modified memory pages.
+# 🚀 RamCleaner
 
-![Platform](https://img.shields.io/badge/platform-Windows-blue)
-![Language](https://img.shields.io/badge/language-Go-00ADD8)
-![License](https://img.shields.io/badge/license-MIT-green)
+### Lightning-fast Windows RAM optimization tool
 
-## Features
+[![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-0078D4?style=for-the-badge&logo=windows)](https://www.microsoft.com/windows)
+[![Language](https://img.shields.io/badge/Go-1.23+-00ADD8?style=for-the-badge&logo=go)](https://go.dev/)
+[![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/randheimer/RamCleaner?style=for-the-badge)](https://github.com/randheimer/RamCleaner/releases)
 
-- **Real-time Memory Monitoring**: Visual display of current RAM usage with color-coded indicators
-- **Process Working Set Trimming**: Reduces memory footprint of running processes
-- **Standby List Purge**: Clears cached memory that can be reclaimed
-- **Modified List Flush**: Writes modified pages back to disk
-- **Top Memory Consumers**: Shows processes using the most RAM
-- **Detailed Statistics**: View comprehensive memory breakdown including kernel pools and system memory
-- **Customizable Cleaning Steps**: Enable/disable individual cleaning operations
-- **Transparent Window Mode**: Optional semi-transparent interface
+**Free up memory instantly** • **Monitor RAM usage** • **Optimize performance**
 
-## Requirements
+[Download Latest Release](https://github.com/randheimer/RamCleaner/releases) • [Report Bug](https://github.com/randheimer/RamCleaner/issues) • [Request Feature](https://github.com/randheimer/RamCleaner/issues)
 
-- Windows 10/11 (x64)
-- Administrator privileges (required for memory operations)
+</div>
 
-## Installation
+---
 
-### Download Binary
+## ✨ Features
 
-Download the latest `ramcleaner.exe` from the [Releases](https://github.com/yourusername/RamCleaner/releases) page.
+<table>
+<tr>
+<td width="50%">
 
-### Build from Source
+### 📊 Real-time Monitoring
+- Visual RAM usage display with color-coded indicators
+- Top memory-consuming processes at a glance
+- Detailed memory breakdown (kernel, drivers, system)
 
-Requires Go 1.23 or later:
+</td>
+<td width="50%">
 
+### 🧹 Smart Cleaning
+- **Trim Working Sets** - Reduce process memory footprint
+- **Purge Standby List** - Clear cached memory
+- **Flush Modified Pages** - Write dirty pages to disk
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### ⚙️ Customizable
+- Enable/disable individual cleaning steps
+- Configure which operations to run
+- Optional transparent window mode
+
+</td>
+<td width="50%">
+
+### ⚡ Lightweight & Fast
+- Native Windows application
+- Minimal resource usage
+- No background services
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🎯 Quick Start
+
+### Prerequisites
+- Windows 10 or Windows 11 (64-bit)
+- Administrator privileges
+
+### Installation
+
+#### Option 1: Download Binary (Recommended)
+1. Go to [Releases](https://github.com/randheimer/RamCleaner/releases/latest)
+2. Download `ramcleaner.exe`
+3. Right-click → **Run as administrator**
+
+#### Option 2: Build from Source
 ```bash
+# Clone the repository
+git clone https://github.com/randheimer/RamCleaner.git
+cd RamCleaner
+
+# Build
 go build -o ramcleaner.exe .
-```
 
-For optimized build with obfuscation (requires [garble](https://github.com/burrowers/garble)):
-
-```bash
+# Or use the build script for optimized binary
 build.bat
 ```
 
-## Usage
+---
 
-1. Run `ramcleaner.exe` as Administrator (right-click → Run as administrator)
-2. The main menu shows:
-   - Current memory usage with visual bar
-   - Top memory-consuming processes
-   - Available actions
+## 📖 Usage Guide
 
-### Main Menu Options
+### Main Menu
 
-- **[1] Clean Memory**: Execute enabled cleaning steps
-- **[2] Details**: View detailed memory breakdown
-- **[3] Settings**: Configure cleaning steps and transparency
-- **[0] Exit**: Close the application
+```
+┌─────────────────────────────────────┐
+│         RamCleaner v1.0.0           │
+├─────────────────────────────────────┤
+│  Memory: 8,234 / 16,384 MB  [50%]  │
+│  ████████████░░░░░░░░░░░░░░         │
+│  free 8,150 MB                      │
+├─────────────────────────────────────┤
+│  [1]  clean memory                  │
+│  [2]  details                       │
+│  [3]  settings                      │
+│  [0]  exit                          │
+└─────────────────────────────────────┘
+```
 
-### Settings
+### Commands
 
-Toggle individual cleaning operations:
-- **Trim Working Sets**: Reduces RAM used by processes
-- **Purge Standby List**: Clears cached memory
-- **Flush Modified List**: Writes modified pages to disk
-- **Transparency**: Toggle window transparency
+| Key | Action | Description |
+|-----|--------|-------------|
+| `1` | **Clean Memory** | Run enabled cleaning operations |
+| `2` | **Details** | View comprehensive memory breakdown |
+| `3` | **Settings** | Configure cleaning steps and appearance |
+| `0` | **Exit** | Close application |
 
-## How It Works
+### Settings Menu
+
+Toggle cleaning operations:
+- ✅ **Trim Working Sets** - Forces processes to release unused memory pages
+- ✅ **Purge Standby List** - Clears standby memory cache
+- ✅ **Flush Modified List** - Writes modified pages to disk
+- 🎨 **Transparency** - Toggle window transparency
+
+---
+
+## 🔧 How It Works
 
 ### Trim Working Sets
-Forces processes to release unused pages from their working sets. Windows will automatically reload pages as needed.
+Forces processes to release unused pages from their working sets. Windows automatically reloads pages as needed, making this a safe operation that can free significant RAM.
+
+**Impact:** Immediate reduction in process memory usage
 
 ### Purge Standby List
-Clears the standby list, which contains pages removed from process working sets but still cached in RAM. This memory is technically available but shows as "in use" in Task Manager.
+Clears the standby list containing pages removed from working sets but still cached in RAM. This memory shows as "in use" in Task Manager but is technically available.
+
+**Impact:** Frees cached memory for new allocations
 
 ### Flush Modified List
 Writes modified (dirty) pages back to disk, converting them to standby pages that can be freed.
 
-## Technical Details
+**Impact:** Reduces active memory pressure
 
-- Uses Windows API calls including `EmptyWorkingSet`, `SetSystemFileCacheSize`, and memory management functions
-- Requires `SeDebugPrivilege` and `SeProfileSingleProcessPrivilege` for process access
-- Safe to use - Windows manages memory reclamation automatically as needed
+---
 
-## Project Structure
+## 🏗️ Project Structure
 
 ```
 RamCleaner/
-├── main.go              # Entry point
-├── go.mod               # Go module definition
-├── build.bat            # Build script
-└── src/
-    ├── app/             # Main application logic and UI flow
-    ├── cleaner/         # Memory cleaning operations
-    ├── sysinfo/         # System information and memory stats
-    ├── ui/              # Terminal UI components and rendering
-    └── winapi/          # Windows API bindings
+├── 📄 main.go                 # Application entry point
+├── 📦 go.mod                  # Go module definition
+├── 🔨 build.bat              # Optimized build script
+│
+├── 📁 src/
+│   ├── app/                  # Main application logic & UI flow
+│   ├── cleaner/              # Memory cleaning operations
+│   ├── sysinfo/              # System info & memory statistics
+│   ├── ui/                   # Terminal UI components
+│   └── winapi/               # Windows API bindings
+│
+├── 📁 .github/
+│   └── workflows/            # GitHub Actions CI/CD
+│
+└── 📄 README.md              # You are here
 ```
 
-## Safety
+---
 
-This tool uses documented Windows API functions and does not modify system files or registry. All operations are reversible - Windows will reallocate memory as applications need it.
+## 🛡️ Safety & Security
 
-## License
+<table>
+<tr>
+<td>
 
-MIT License - see LICENSE file for details
+### ✅ Safe Operations
+- Uses documented Windows APIs
+- No system file modifications
+- No registry changes
+- Fully reversible operations
 
-## Contributing
+</td>
+<td>
 
-Contributions welcome! Please feel free to submit a Pull Request.
+### 🔒 Security
+- Requires admin for memory access only
+- No network connections
+- No data collection
+- Open source & auditable
 
-## Acknowledgments
+</td>
+</tr>
+</table>
 
-Built with Go and the [golang.org/x/sys/windows](https://pkg.go.dev/golang.org/x/sys/windows) package.
+**Note:** Windows automatically manages memory allocation. This tool helps reclaim memory faster, but Windows will reallocate as applications need it.
+
+---
+
+## 💻 Technical Details
+
+### System Requirements
+- **OS:** Windows 10 20H1+ or Windows 11
+- **Architecture:** x64
+- **Privileges:** Administrator (for process memory access)
+- **RAM:** 4GB minimum, 8GB+ recommended
+
+### Windows API Functions Used
+- `EmptyWorkingSet` / `SetProcessWorkingSetSize` - Trim working sets
+- `SetSystemFileCacheSize` - Purge standby list
+- Memory management APIs - Flush modified pages
+
+### Required Privileges
+- `SeDebugPrivilege` - Process access for enumeration
+- `SeProfileSingleProcessPrivilege` - Memory statistics
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how you can help:
+
+1. 🍴 Fork the repository
+2. 🔨 Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. ✅ Commit your changes (`git commit -m 'Add amazing feature'`)
+4. 📤 Push to the branch (`git push origin feature/amazing-feature`)
+5. 🎉 Open a Pull Request
+
+### Development Setup
+```bash
+# Clone the repo
+git clone https://github.com/randheimer/RamCleaner.git
+cd RamCleaner
+
+# Install dependencies
+go mod download
+
+# Build
+go build -v .
+
+# Run
+./ramcleaner.exe
+```
+
+---
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙏 Acknowledgments
+
+- Built with [Go](https://go.dev/) programming language
+- Uses [golang.org/x/sys/windows](https://pkg.go.dev/golang.org/x/sys/windows) for Windows API access
+- Inspired by the need for simple, effective RAM management tools
+
+---
+
+<div align="center">
+
+### ⭐ Star this repository if you find it useful!
+
+Made with ❤️ for the Windows community
+
+[⬆ Back to Top](#-ramcleaner)
+
+</div>
