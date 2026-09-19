@@ -92,20 +92,22 @@ build.bat
 
 ### Main Menu
 
-```
-┌─────────────────────────────────────┐
-│         RamCleaner v1.0.0           │
-├─────────────────────────────────────┤
-│  Memory: 8,234 / 16,384 MB  [50%]  │
-│  ████████████░░░░░░░░░░░░░░         │
-│  free 8,150 MB                      │
-├─────────────────────────────────────┤
-│  [1]  clean memory                  │
-│  [2]  details                       │
-│  [3]  settings                      │
-│  [0]  exit                          │
-└─────────────────────────────────────┘
-```
+When you launch RamCleaner, you'll see:
+
+- **Header:** Application title and version
+- **Memory Stats:** Current usage (e.g., 8,234 / 16,384 MB [50%])
+- **Visual Bar:** Color-coded progress indicator
+- **Available RAM:** Free memory display
+- **Menu Options:**
+  - `[1]` Clean memory
+  - `[2]` Details
+  - `[3]` Settings
+  - `[0]` Exit
+
+The interface uses color coding:
+- 🟢 **Green** (< 55%) - Healthy
+- 🟡 **Yellow** (55-79%) - Moderate
+- 🔴 **Red** (≥ 80%) - High usage
 
 ### Commands
 
