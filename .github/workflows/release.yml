@@ -1,0 +1,59 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.23'
+
+      - name: Build
+        run: |
+          go build -trimpath -ldflags="-s -w" -o ramcleaner.exe .
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            ramcleaner.exe
+          body: |
+            ## RamCleaner Release
+
+            Windows RAM optimization tool
+
+            **Features:**
+            - Memory monitoring and visualization
+            - Working set trimming
+            - Standby list purge
+            - Modified list flush
+            - Process memory statistics
+
+            **Requirements:**
+            - Windows 10/11 (x64)
+            - Administrator privileges
+
+            **Installation:**
+            1. Download `ramcleaner.exe`
+            2. Right-click → Run as administrator
+
+            🤖 Generated with [Claude Code](https://claude.com/claude-code)
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
